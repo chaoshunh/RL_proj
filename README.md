@@ -16,9 +16,9 @@ Short presentation video here.
    * [tum_ardrone](https://github.com/tum-vision/tum_ardrone)
 
 2. **Python packages** required are in [requirements.txt](./requirements.txt). Install by
-    ```
-    pip install -r requirements.txt
-    ```
+```
+pip install -r requirements.txt
+```
 
 
 ## Preliminaries
@@ -30,6 +30,7 @@ Coordinates of all obstacles are available at [env.csv](./assets/env.csv).
 
 | Distances to k nearest obstacles (1*k) | Angles to k nearest obstacles (1*k) | Velocity | Yaw | Position (1*2) | 
 |--------------------------------------------------------|---------------------------------------------------|----------|-----|------------------------------|
+
 \* k is set to 3. 
 
 ### Action
@@ -67,8 +68,8 @@ For customizing a new world, remember to change [env.csv](./assets/env.csv) for 
 
 **Parameters can be tuned**:
 
-`rate`: the frequency (in Hz) of writing sample data.
-`isTrain`: define whether the script is collecting data, here we set to `True`.
+`rate`: the frequency (in Hz) of writing sample data.\
+`isTrain`: define whether the script is collecting data, here we set to `True`.\
 `dataset`: the file containing sample data, which will be in folder "./assets".
 
 **An example**:
@@ -89,17 +90,16 @@ Sample data file: [traj.csv](./assets/traj.csv).
 Run the script with parameters specified, for example:
 ```
 $python 'dqn_batch.py' --dataset 'traj.csv' --ckptsave 'testckpt.h5'
-
 ```
-Pretrained checkpoints [here](./ckpt/proj-dqn.h5). Convergence of our training:
-<img src="./assets/converge.png" height = "250" />
+Pretrained checkpoints [here](./ckpt/proj-dqn.h5). Convergence of our training:\
+<img src="./assets/converge.png" height = "300" />
 ### Test Results
 **Main script**: [deep_navigation_RL.py](./src/deep_navigation_RL.py).
 
 **Parameters can be tuned**:
 
-`rate`: the frequency (in Hz) of update action (must be same as that for collecting data).
-`isTrain`: define whether the script is collecting data, here we set to `False`.
+`rate`: the frequency (in Hz) of update action (must be same as that for collecting data).\
+`isTrain`: define whether the script is collecting data, here we set to `False`.\
 `ckptload`: the checkpoint file to be loaded from folder "./ckpt".
 
 **An example**:
