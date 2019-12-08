@@ -11,7 +11,6 @@ Short presentation video here.
 1. **Require Packages:**
 
    * [ardrone_autonomy](https://github.com/AutonomyLab/ardrone_autonomy)
-
    * [gazebo_ros_pkgs](https://github.com/ros-simulation/gazebo_ros_pkgs/tree/hydro-devel)
    * [tum_ardrone](https://github.com/tum-vision/tum_ardrone)
 

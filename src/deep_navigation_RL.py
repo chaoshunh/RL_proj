@@ -164,7 +164,7 @@ class deep_navigation:
     def run_main(self):      
         # choose action from input, can have lower action update frequency
         dists, _ = self.params_obstacle()
-        if np.min(dists) > 1.2:
+        if np.min(dists) > 1.2 and not self.col_data_mode:
             self.ac = 1 # v = 0.5; steer = 0 
         else:
             self.ac = self.agent.act(self.state, False)
@@ -258,13 +258,13 @@ class deep_navigation:
         # 3 actions
         if action % 3 == 0:
             self.steer = 1.  # left
-            self.forward_speed = 0.2
+            self.forward_speed = 0.5 
         elif action % 3 == 1:
             self.steer = 0  # forward
-            self.forward_speed = 0.5
+            self.forward_speed = 0.7
         elif action % 3 == 2:
             self.steer = -1. # right (clockwise)
-            self.forward_speed = 0.2
+            self.forward_speed = 0.5
 
 
 
@@ -311,10 +311,17 @@ class deep_navigation:
             self.reward = 100 / (error_x + error_y)            
             self.no_trip += 1 # complete one trip, trip +1
 
+        # restriction for action changing
+        if self.ac != 1: 
+            self.reward = -5
+        
         # collision with obstacles
         dists, _ = self.params_obstacle()
         if min(dists) <= 0.8:
-            self.reward = - 10     
+            self.reward = - 10   
+
+        
+
 
     def params_obstacle(self):    
         global pi
@@ -371,6 +378,7 @@ def main():
     global pi
 
     rospy.init_node('deep_navigation', anonymous=True)
+
     fre = rospy.get_param('~rate') # frequency of update action, and writing to csv if train
     train = rospy.get_param('~isTrain') # whether is training
     dataset = rospy.get_param('~dataset') # sample data for training
