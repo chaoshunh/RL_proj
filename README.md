@@ -48,6 +48,7 @@ Reward is decided by whether the drone collides into obstacles, how long it take
 | Situation          | Reward |
 |--------------------|--------|
 | flying             | -1     |
+| turning             | -5     |
 | Collide            | -10    |
 
 ## Code Guidance
