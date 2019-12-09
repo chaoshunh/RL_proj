@@ -15,7 +15,7 @@ from drone_control.msg import filter_state, pos_status # message types
 from geometry_msgs.msg import Twist
 from ardrone_autonomy.msg import Navdata
 import six.moves.urllib as urllib
-from dqn_batch import DQNAgent
+from dqn_batch_net3 import DQNAgent
 import numpy as np
 import pandas as pd
 
@@ -164,19 +164,23 @@ class deep_navigation:
     def run_main(self):  
         # choose action from input, can have lower action update frequency        
         dists, _ = self.params_obstacle()
-        if np.min(dists) > 1. and not self.col_data_mode:
+        if np.min(dists) > 1.5 and not self.col_data_mode:
             self.ac = 1 # v = 0.5; steer = 0 
         else:
             self.ac = self.agent.act(self.state, False)
-        
-        # # test how many times the drone changes the direction
+            print(self.ac)
+        # test how many times the drone changes the direction
         # if self.droneState == 3 or self.droneState == 7:
-        #     with open(str(parenpath + '/assets/direc_change.csv'), 'a+') as file_test:  
+        #     with open(str(parenpath + '/assets/accumu_R.csv'), 'a+') as file_test:  
         #         writer = csv.writer(file_test)
-        #         if self.ac != 1:
-        #             writer.writerow(np.array([1]))
-        #         else:
-        #             writer.writerow(np.array([0]))
+        #         # if self.ac != 1:
+        #         #     writer.writerow(np.array([1]))
+        #         # else:
+        #         #     writer.writerow(np.array([0]))
+
+        #         # record reward property
+        #         self.get_reward()
+        #         writer.writerow(np.array([self.reward]))
              
         self.action_result(action = self.ac)
 

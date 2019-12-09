@@ -19,8 +19,8 @@
   <!--drone control-->
   <arg name="rate" default="2" />
   <arg name="isTrain" default="True" />
-  <arg name="dataset" default="testDataset.csv" />
-  <arg name="ckptload" default="proj-dqn.h5" />
+  <arg name="dataset" default="traj_test.csv" />
+  <arg name="ckptload" default="ckpt_yc.h5" />
 
   <node pkg="drone_control" name="deep_navigation" type="deep_navigation_RL.py" output="screen" >
     <param name="rate" type="int" value="$(arg rate)"/>
