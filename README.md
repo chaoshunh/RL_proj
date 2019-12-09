@@ -1,7 +1,7 @@
 # Smooth Velocity Control for MAVs
 The project is the final project of course [CS394R: Reinforcement Learning](http://www.cs.utexas.edu/~pstone/Courses/394Rfall19/). The project realized collision avoidance for a micro-air-vehicle (MAV) in simulation and can be easily extended to real-world test. 
-<img align="middle" src="./assets/gif1.gif" height = "300" />
-<img align="middle" src="./assets/gif2.gif" height = "300" />
+<img src="./assets/gif1.gif" height = "200" />
+<img src="./assets/gif2.gif" height = "200" />
 
 Detailed report here.
 
