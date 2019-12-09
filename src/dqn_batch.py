@@ -11,7 +11,6 @@ from keras.layers import Dense
 from keras.optimizers import Adam
 from readCSV import readCSV
 
-
 EPISODES = 1000
 state_size = 10
 action_size = 3
@@ -90,10 +89,13 @@ class DQNAgent:
 
 
 if __name__ == "__main__":    
+    """
+    The main script is used for training and saving the checkpoints
+    """
 
     parser = argparse.ArgumentParser(description='Train DQN Based Drone Collision Avoidance')
-    parser.add_argument('--dataset', default='traj.csv', help='choose dataset for training')
-    parser.add_argument('--ckptsave', default='ckpt.h5', help='ckpt file to save in ../ckpt folder')
+    parser.add_argument('--dataset', default='traj_weight_R.csv', help='choose dataset for training')
+    parser.add_argument('--ckptsave', default='ckpt_weight_R.h5', help='ckpt file to save in ../ckpt folder')
 
     args = parser.parse_args()
     agent = DQNAgent(state_size, action_size, filename = args.dataset)

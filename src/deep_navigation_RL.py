@@ -130,16 +130,16 @@ class deep_navigation:
         elif Sig == 2 or Sig == 8:
             self.ini =  True
 
-        # the coordinates in "drone" space and "env" space are different, the transformation is shown in ../assets/env_explain.pdf
-        dis_add = np.sqrt(pow(data.y - self.loc_x, 2) + pow(-data.x - self.loc_y, 2))
+        # the coordinates in "drone" space and "env" space are different, the transformation is shown in ../assets/env_explain.pdf 
+        # dis_add = np.sqrt(pow(data.y - self.loc_x, 2) + pow(-data.x - self.loc_y, 2))
         self.loc_x = data.y
         self.loc_y = - data.x
         self.yaw = data.yaw
         # print(self.yaw)
         # self.velo = data.dx
         self.droneState = data.droneState
-        if self.velo >= 0.1: # make sure that the drone is moving rather than getting stuck by obstacles
-            self.dis_accumu += dis_add
+        # if self.velo >= 0.1: # make sure that the drone is moving rather than getting stuck by obstacles
+        #     self.dis_accumu += dis_add
 
         if not self.ini:
             if self.col_data_mode:
@@ -161,14 +161,26 @@ class deep_navigation:
         self.state = np.hstack([dists_k, angles_k, np.array([self.velo/1000, self.yaw/180*pi, self.loc_x, self.loc_y]).reshape([1,-1])])
         self.moveRL()
    
-    def run_main(self):      
-        # choose action from input, can have lower action update frequency
+    def run_main(self):  
+        # choose action from input, can have lower action update frequency        
         dists, _ = self.params_obstacle()
-        if np.min(dists) > 1.2 and not self.col_data_mode:
+        if np.min(dists) > 1. and not self.col_data_mode:
             self.ac = 1 # v = 0.5; steer = 0 
         else:
             self.ac = self.agent.act(self.state, False)
+        
+        # # test how many times the drone changes the direction
+        # if self.droneState == 3 or self.droneState == 7:
+        #     with open(str(parenpath + '/assets/direc_change.csv'), 'a+') as file_test:  
+        #         writer = csv.writer(file_test)
+        #         if self.ac != 1:
+        #             writer.writerow(np.array([1]))
+        #         else:
+        #             writer.writerow(np.array([0]))
+             
         self.action_result(action = self.ac)
+
+        
 
     def head_to_dest_adjust(self):
         def sgn(x): return 1. if x > 0 else -1. if x < 0 else 0.
@@ -319,9 +331,6 @@ class deep_navigation:
         dists, _ = self.params_obstacle()
         if min(dists) <= 0.8:
             self.reward = - 10   
-
-        
-
 
     def params_obstacle(self):    
         global pi
