@@ -94,7 +94,7 @@ Run the script with parameters specified, for example:
 $python 'dqn_batch.py' --dataset 'traj.csv' --ckptsave 'testckpt.h5'
 ```
 Pretrained checkpoints [here](./ckpt/proj-dqn.h5). Convergence of our training:\
-<img src="./assets/converge.png" height = "300" />
+<img src="./assets/converge_.png" height = "300" />
 ### Test Results
 **Main script**: [deep_navigation_RL.py](./src/deep_navigation_RL.py).
 
